@@ -1,0 +1,177 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Skincare da Carol//PT-BR
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Skincare
+X-WR-TIMEZONE:America/Sao_Paulo
+BEGIN:VTIMEZONE
+TZID:America/Sao_Paulo
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:-0300
+TZOFFSETTO:-0300
+TZNAME:-03
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:manha@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20261110T060000
+DURATION:PT10M
+SUMMARY:Skincare da manhã
+DESCRIPTION:Actine\, Tônico (5 a 6 gotas)\, Vitamina C Gold (3 a 4 gotas)\
+ , Eye Cream\, Hydragel\, Protetor (2 dedos). Detalhes no app: https://anna
+ carolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=DAILY
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare da manhã
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes1-R@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20261109T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Retinal
+DESCRIPTION:Actine\, Eye Cream\, Retinal (1 ervilha\, rosto bem seco)\, Cal
+ ming Cream. Detalhes no app: https://annacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=MO,TH;UNTIL=20261208T235959
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Retinal
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes1-M@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20261110T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Mandélico
+DESCRIPTION:Actine\, Eye Cream\, Gel Mandélico (1 ervilha)\, Calming Cream
+ . Detalhes no app: https://annacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=TU,SA;UNTIL=20261208T235959
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Mandélico
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes1-D@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20261111T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Descanso
+DESCRIPTION:Actine\, Eye Cream\, Calming Cream. Detalhes no app: https://an
+ nacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=WE,FR,SU;UNTIL=20261208T235959
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Descanso
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes2-R@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20261209T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Retinal
+DESCRIPTION:Actine\, Eye Cream\, Retinal (1 ervilha\, rosto bem seco)\, Cal
+ ming Cream. Detalhes no app: https://annacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20270108T235959
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Retinal
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes2-M@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20261212T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Mandélico
+DESCRIPTION:Actine\, Eye Cream\, Gel Mandélico (1 ervilha)\, Calming Cream
+ . Detalhes no app: https://annacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=SA;UNTIL=20270108T235959
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Mandélico
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes2-D@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20261210T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Descanso
+DESCRIPTION:Actine\, Eye Cream\, Calming Cream. Detalhes no app: https://an
+ nacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=TU,TH,SU;UNTIL=20270108T235959
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Descanso
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes3-R@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20270110T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Retinal
+DESCRIPTION:Actine\, Eye Cream\, Retinal (1 ervilha\, rosto bem seco)\, Cal
+ ming Cream. Detalhes no app: https://annacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,TH,FR,SU
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Retinal
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes3-M@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20270109T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Mandélico
+DESCRIPTION:Actine\, Eye Cream\, Gel Mandélico (1 ervilha)\, Calming Cream
+ . Detalhes no app: https://annacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=SA
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Mandélico
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mes3-D@skincare-carol
+DTSTAMP:20261107T120000Z
+DTSTART;TZID=America/Sao_Paulo:20270113T210000
+DURATION:PT10M
+SUMMARY:Skincare noite: Descanso
+DESCRIPTION:Actine\, Eye Cream\, Calming Cream. Detalhes no app: https://an
+ nacarolinebl18.github.io/skincare/
+URL:https://annacarolinebl18.github.io/skincare/
+RRULE:FREQ=WEEKLY;BYDAY=WE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Skincare noite: Descanso
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
