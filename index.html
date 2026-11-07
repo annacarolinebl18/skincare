@@ -361,5 +361,9 @@ body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 })();
 </script>
 
+<script>
+/* atualização automática: se houver versão nova no site, carrega na hora */
+(function(){var VER="2026-11-07b";try{fetch("versao.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():"";}).then(function(v){v=(v||"").trim();if(v&&v!==VER&&location.search.indexOf("v="+v)<0){location.replace("./?v="+encodeURIComponent(v));}}).catch(function(){});}catch(e){}})();
+</script>
 </body>
 </html>
