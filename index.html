@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icone-180.png">
 <link rel="icon" type="image/png" href="icone-192.png">
 <link rel="manifest" href="manifest.json">
-<title>Skincare da Carol</title>
+<title>Meu Skincare</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Nunito:wght@400;600;700;800&family=Mali:wght@500;600&display=swap">
@@ -126,7 +126,7 @@ details[open] .chev{transform:rotate(180deg)}
 
 /* menu de baixo */
 nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--paper);border-top:1.5px solid var(--line);
-  padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+  padding:6px max(8px,env(safe-area-inset-right,0px)) max(6px,calc(env(safe-area-inset-bottom,0px) - 18px)) max(8px,env(safe-area-inset-left,0px))}
 nav.tabs .in{max-width:460px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 nav.tabs button{border:0;background:transparent;border-radius:14px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.72rem;font-weight:800;color:var(--soft);cursor:pointer}
 nav.tabs button svg{width:22px;height:22px}
@@ -138,7 +138,17 @@ nav.tabs button[aria-current="page"]{color:var(--rose);background:var(--rose-was
 img{max-width:100%}
 html,body{margin:0}
 body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
-.app{padding-top:calc(16px + env(safe-area-inset-top,0px))}
+.app{padding-top:calc(34px + env(safe-area-inset-top,0px));padding-bottom:calc(78px + env(safe-area-inset-bottom,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.top{position:relative}
+.start-btn{margin-left:auto;flex:none;border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;font-size:.78rem;font-weight:800;color:var(--rose);cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.start-btn small{font-size:.65rem;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.start-panel{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.start-panel label{font-weight:800}
+.start-panel .row{display:flex;gap:8px}
+.start-panel input{flex:1;min-width:0;font:inherit;padding:10px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.start-panel button{border:0;border-radius:14px;padding:10px 16px;font-weight:800;background:var(--rose);color:#fff;cursor:pointer}
+.start-panel p{font-size:.82rem;color:var(--soft)}
 </style>
 
 </head>
@@ -161,8 +171,14 @@ body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 <div class="app">
   <header class="top">
     <span class="logo"><svg><use href="#i-drop"/></svg></span>
-    <div class="top-txt"><h1>Skincare da Carol</h1><p id="todayTxt"></p></div>
+    <div class="top-txt"><h1>Meu Skincare</h1><p id="todayTxt"></p></div>
+    <button class="start-btn" id="startBtn" type="button" aria-expanded="false"><small>Início</small><span id="startLbl">09/11</span></button>
   </header>
+  <div class="start-panel" id="startPanel" hidden>
+    <label for="startIn">Em que dia você começa? (a 1ª vez é à noite)</label>
+    <div class="row"><input type="date" id="startIn"><button type="button" id="startSave">Salvar</button></div>
+    <p>A manhã começa no dia seguinte. O mês 2 e o mês 3 contam a partir dessa data.</p>
+  </div>
 
   <!-- HOJE -->
   <main class="view" id="v-hoje">
@@ -274,8 +290,12 @@ body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
   var AM=[S.actineAM,S.tonico,S.vitc,S.eye,S.hydra,S.prot];
   var PM={R:[S.actinePM,S.eyePM,S.retinal,S.calm],M:[S.actinePM,S.eyePM,S.mand,S.calm],D:[S.actinePM,S.eyePM,S.calm]};
 
-  // datas: começa segunda 09/11/2026 à noite; manhã começa terça 10/11
-  var START=new Date(2026,10,9), M2=new Date(2026,11,9), M3=new Date(2027,0,9);
+  // datas: a 1ª noite é a data de início (padrão 09/11/2026); a manhã começa no dia seguinte
+  var iso="2026-11-09";
+  try{var sv=localStorage.getItem("skin-inicio");if(sv&&/^\d{4}-\d{2}-\d{2}$/.test(sv))iso=sv;}catch(e){}
+  var ip=iso.split("-").map(Number);
+  var START=new Date(ip[0],ip[1]-1,ip[2]), M2=new Date(ip[0],ip[1],ip[2]), M3=new Date(ip[0],ip[1]+1,ip[2]);
+  var NEXT=new Date(ip[0],ip[1]-1,ip[2]+1);
   var now=new Date(), t0=new Date(now.getFullYear(),now.getMonth(),now.getDate());
   function monthOf(d){return d<M2?1:(d<M3?2:3);}
   function dm(d){return ("0"+d.getDate()).slice(-2)+"/"+("0"+(d.getMonth()+1)).slice(-2);}
@@ -290,12 +310,21 @@ body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 
   // topo e mês
   document.getElementById("todayTxt").textContent=FULL[t0.getDay()]+", "+dm(t0)+"/"+t0.getFullYear();
+  document.getElementById("startLbl").textContent=dm(START);
+  var sIn=document.getElementById("startIn"), sPanel=document.getElementById("startPanel"), sBtn=document.getElementById("startBtn");
+  sIn.value=iso;
+  sBtn.addEventListener("click",function(){var open=sPanel.hidden;sPanel.hidden=!open;sBtn.setAttribute("aria-expanded",String(open));});
+  document.getElementById("startSave").addEventListener("click",function(){
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(sIn.value))return;
+    try{localStorage.setItem("skin-inicio",sIn.value);}catch(e){}
+    location.reload();
+  });
   var mStart=[null,START,M2,M3][month], mEnd=[null,M2,M3,null][month];
   document.getElementById("mName").textContent=month===3?"Mês 3 em diante":"Mês "+month;
   var mDays=document.getElementById("mDays"), bar=document.getElementById("mBar");
   if(t0<START){
     var f=days(t0,START);
-    mDays.textContent="começa segunda, 09/11, à noite";
+    mDays.textContent="começa "+FULL[START.getDay()]+", "+dm(START)+", à noite";
     document.getElementById("mNote").textContent="Falta"+(f===1?" 1 dia":"m "+f+" dias")+". "+NOTE[1];
     bar.style.width="0%";
   }else{
@@ -339,8 +368,8 @@ body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
     var box=document.getElementById("steps"), hint=document.getElementById("tapHint");
     box.className="steps"+(period==="pm"?" pmv":"");
     var wait=null;
-    if(ph==="pre") wait=period==="am"?"A rotina da manhã começa na terça, 10/11.":"A primeira noite é segunda, 09/11, com o retinal.";
-    else if(ph==="first"&&period==="am") wait="Hoje ainda não tem manhã. Começa amanhã, terça, 10/11.";
+    if(ph==="pre") wait=period==="am"?"A rotina da manhã começa "+FULL[NEXT.getDay()]+", "+dm(NEXT)+".":"A primeira noite é "+FULL[START.getDay()]+", "+dm(START)+": "+LABEL[typeOf(START)].toLowerCase()+".";
+    else if(ph==="first"&&period==="am") wait="Hoje ainda não tem manhã. Começa amanhã, "+FULL[NEXT.getDay()]+", "+dm(NEXT)+".";
     if(wait){box.innerHTML='<p class="waitbox">'+wait+'</p>';hint.hidden=true;}
     else{box.innerHTML=(period==="am"?AM:PM[t]).map(stepHTML).join("");hint.hidden=false;}
   }
@@ -363,7 +392,7 @@ body{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 
 <script>
 /* atualização automática: se houver versão nova no site, carrega na hora */
-(function(){var VER="2026-11-07b";try{fetch("versao.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():"";}).then(function(v){v=(v||"").trim();if(v&&v!==VER&&location.search.indexOf("v="+v)<0){location.replace("./?v="+encodeURIComponent(v));}}).catch(function(){});}catch(e){}})();
+(function(){var VER="2026-11-07c";try{fetch("versao.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():"";}).then(function(v){v=(v||"").trim();if(v&&v!==VER&&location.search.indexOf("v="+v)<0){location.replace("./?v="+encodeURIComponent(v));}}).catch(function(){});}catch(e){}})();
 </script>
 </body>
 </html>
